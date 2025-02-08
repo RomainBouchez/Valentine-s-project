@@ -5,13 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Saint-Valentin</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Parisienne&family=Sacramento&family=Playfair+Display&family=Lora&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        <h1>Compte à rebours pour la Saint-Valentin</h1>
+        <h1>Countdown of Valentine's Day for Mika!</h1>
         <div id="countdown"></div>
-        <button id="unlockButton" style="display:none;">Débloquer les photos</button>
+        <button id="unlockButton" disabled>Access to the website</button>
+        <div id="message" class="hidden"></div>
     </div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <p id="modal-message"></p>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
