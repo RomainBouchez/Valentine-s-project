@@ -50,3 +50,46 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 });
+
+
+document.getElementById("download-selected").addEventListener("click", function() {
+    const zip = new JSZip();
+    const selectedPhotos = document.querySelectorAll(".photo input[type='checkbox']:checked");
+
+    if (selectedPhotos.length === 0) {
+        alert("Veuillez sélectionner au moins une photo.");
+        return;
+    }
+
+    let count = 0;
+    selectedPhotos.forEach((checkbox) => {
+        const img = checkbox.parentElement.querySelector("img");
+        const imgSrc = img.src;
+        const imgName = imgSrc.split('/').pop();
+
+        fetch(imgSrc)
+            .then(response => response.blob())
+            .then(blob => {
+                zip.file(imgName, blob);
+                count++;
+                if (count === selectedPhotos.length) {
+                    zip.generateAsync({ type: "blob" }).then(function(content) {
+                        const link = document.createElement("a");
+                        link.href = URL.createObjectURL(content);
+                        link.download = "photos.zip";
+                        link.click();
+                    });
+                }
+            });
+    });
+});
+
+function openLightbox(src) {
+    document.getElementById("lightbox-img").src = src;
+    document.getElementById("download-btn").href = src;
+    document.getElementById("lightbox").style.display = "flex";
+}
+
+function closeLightbox() {
+    document.getElementById("lightbox").style.display = "none";
+}
