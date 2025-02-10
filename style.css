@@ -1,25 +1,578 @@
+  /* general styling */
+  @font-face {
+    font-family: "SanFrancisco";
+    src:
+      url("https://cdn.rawgit.com/AllThingsSmitty/fonts/25983b71/SanFrancisco/sanfranciscodisplay-regular-webfont.woff2") format("woff2"),
+      url("https://cdn.rawgit.com/AllThingsSmitty/fonts/25983b71/SanFrancisco/sanfranciscodisplay-regular-webfont.woff") format("woff");
+  }
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f8e3e3;
     color: #333;
-    text-align: center;
-    padding: 50px;
+    margin: 0;
+    padding: 0;
+}
+body.container {
+    font-family: 'Lora', serif;
+    background-color: #f8e3e3;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-.container {
-    max-width: 600px;
-    margin: auto;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-#countdown {
-    font-size: 2em;
+.countdown-timer {
+    font-size: 3rem;
+    color: #1d3557;
     margin-bottom: 20px;
 }
 
+.unlock-button {
+    background-color: #e63946;
+    color: #fff;
+    font-size: 1.1rem;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.unlock-button:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+}
+
+.unlock-button:hover:not(:disabled) {
+    background-color: #d91d39;
+}
+
+.hidden {
+    display: none;
+    font-size: 1.5rem;
+    color: #1d3557;
+    margin-top: 20px;
+}
+
+.container {
+    text-align: center;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    max-width: 400px;
+    width: 100%;
+}
+
+
+.container, .dashboard-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* Countdown styles */
+#countdown {
+    font-size: 2em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Dashboard styles */
+.apps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.app-card {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.app-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.app-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.app-icon {
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+.app-title {
+    font-size: 1.5em;
+    margin: 0;
+}
+
+.preview-container {
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.preview-photos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+}
+
+.preview-photos img {
+    width: 100%;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+/* App Content styles */
+.app-content {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 20px;
+}
+
+.back-button {
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1em;
+    color: #666;
+}
+
+.back-button:hover {
+    color: #333;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Photo Gallery styles */
+.photo-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.photo {
+    position: relative;
+}
+
+.photo img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.photo img:hover {
+    transform: scale(1.05);
+}
+
+.photo input[type="checkbox"] {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 2;
+}
+
+/* Messages styles */
+.imessage {
+    background-color: #fff;
+    border: 1px solid #e5e5ea;
+    border-radius: 0.25rem;
+    display: flex;
+    flex-direction: column;
+    font-family: "SanFrancisco";
+    font-size: 1.25rem;
+    margin: 0 auto 1rem;
+    max-width: 600px;
+    padding: 0.5rem 1.5rem;
+  }
+  
+  .imessage p {
+    border-radius: 1.15rem;
+    line-height: 1.25;
+    max-width: 75%;
+    padding: 0.5rem .875rem;
+    position: relative;
+    word-wrap: break-word;
+  }
+  
+  .imessage p::before,
+  .imessage p::after {
+    bottom: -0.1rem;
+    content: "";
+    height: 1rem;
+    position: absolute;
+  }
+
+  .message-info {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: #888;
+}
+
+  .message-datefrom-me {
+    font-size: 0.875rem;
+    color: #888;
+    margin-top: 0.5rem;
+    text-align: right;
+    display: flex;
+    letter-spacing: 0.2px;
+    flex-direction: row-reverse;
+}
+
+.message-datefrom-them {
+    font-size: 0.875rem;
+    color: #888;
+    margin-top: 0.5rem;
+    text-align: left;
+    display: flex;
+    letter-spacing: 0.2px;
+}
+
+  .message-sender {
+    font-size: 0.875rem;
+    color: #888;
+    margin-top: 0.5rem;
+    text-align: right;
+    display: flex;
+    letter-spacing: 0.2px;
+}
+
+
+.message-senderfrom-me {
+    text-align: right;
+    color: #555;
+    
+}
+
+.message-senderfrom-them {
+    text-align: left;
+    color: #555;
+    
+}
+  
+  p.from-me {
+    align-self: flex-end;
+    background-color: #248bf5;
+    color: #fff; 
+  }
+  
+  p.from-me::before {
+    border-bottom-left-radius: 0.8rem 0.7rem;
+    border-right: 1rem solid #248bf5;
+    right: -0.35rem;
+    transform: translate(0, -0.1rem);
+  }
+  
+  p.from-me::after {
+    background-color: #fff;
+    border-bottom-left-radius: 0.5rem;
+    right: -40px;
+    transform:translate(-30px, -2px);
+    width: 10px;
+  }
+  
+  p[class^="from-"] {
+    margin: 0.5rem 0;
+    width: fit-content;
+  }
+  
+  p.from-me ~ p.from-me {
+    margin: 0.25rem 0 0;
+  }
+  
+  p.from-me ~ p.from-me:not(:last-child) {
+    margin: 0.25rem 0 0;
+  }
+  
+  p.from-me ~ p.from-me:last-child {
+    margin-bottom: 0.5rem;
+  }
+  
+  p.from-them {
+    align-items: flex-start;
+    background-color: #e5e5ea;
+    color: #000;
+  }
+  
+  p.from-them:before {
+    border-bottom-right-radius: 0.8rem 0.7rem;
+    border-left: 1rem solid #e5e5ea;
+    left: -0.35rem;
+    transform: translate(0, -0.1rem);
+  }
+  
+  p.from-them::after {
+    background-color: #fff;
+    border-bottom-right-radius: 0.5rem;
+    left: 20px;
+    transform: translate(-30px, -2px);
+    width: 10px;
+  }
+  
+  p[class^="from-"].emoji {
+    background: none;
+    font-size: 2.5rem;
+  }
+  
+  p[class^="from-"].emoji::before {
+    content: none;
+  }
+  
+  .no-tail::before {
+    display: none;
+  }
+  
+  .margin-b_none {
+    margin-bottom: 0 !important;
+  }
+  
+  .margin-b_one {
+    margin-bottom: 1rem !important;
+  }
+  
+  .margin-t_one {
+    margin-top: 1rem !important;
+  }
+
+  
+  body {  
+    font-family: -apple-system, 
+      BlinkMacSystemFont, 
+      "Segoe UI", 
+      Roboto, 
+      Oxygen-Sans, 
+      Ubuntu, 
+      Cantarell, 
+      "Helvetica Neue", 
+      sans-serif;
+    font-weight: normal;
+    margin: 0;
+  }
+  
+  .container {
+    margin: 0 auto;
+    max-width: 600px;
+    padding: 1rem;
+  }
+  
+  h1 {
+    font-weight: normal;
+    margin-bottom: 0.5rem;
+  }
+  
+  h2 {
+    border-bottom: 1px solid #e5e5ea;
+    color: #666;
+    font-weight: normal;
+    margin-top: 0;
+    padding-bottom: 1.5rem;
+  }
+  
+  .comment {
+    color: #222;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    margin-bottom: 1.25rem;
+    max-width: 100%;
+    padding: 0;
+  }
+  
+  @media screen and (max-width: 800px) {
+    body {
+      margin: 0 0.5rem;
+    }
+  
+    .container {
+      padding: 0.5rem;
+    }
+  
+    .imessage {
+      font-size: 1.05rem;
+      margin: 0 auto 1rem;
+      max-width: 600px;
+      padding: 0.25rem 0.875rem;
+    }
+  
+    .imessage p {
+      margin: 0.5rem 0;
+    }
+  }
+
+/* Playlist styles */
+.song-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.song-item:hover {
+    background: #f8f8f8;
+}
+
+.play-icon {
+    margin-right: 15px;
+    color: #D96482;
+}
+
+.playlist-container {
+    background: linear-gradient(to bottom, #450a0a, #0f0f0f);
+    color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    min-height: 100vh;
+}
+
+.playlist-header {
+    display: flex;
+    align-items: flex-end;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.playlist-cover {
+    width: 232px;
+    height: 232px;
+    background: #282828;
+    box-shadow: 0 4px 60px rgba(0,0,0,.5);
+}
+
+.playlist-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.playlist-info {
+    flex: 1;
+}
+
+.playlist-type {
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.playlist-title {
+    font-size: 6rem;
+    font-weight: 700;
+    margin: 0.25rem 0;
+    color: white;
+}
+
+.playlist-description {
+    color: #a7a7a7;
+    margin: 0.5rem 0;
+}
+
+.playlist-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: #a7a7a7;
+    margin-top: 1rem;
+}
+
+.song-list {
+    margin-top: 2rem;
+}
+
+.song-header {
+    display: grid;
+    grid-template-columns: 16px 4fr 3fr 2fr minmax(120px, 1fr);
+    padding: 0.5rem 1rem;
+    color: #a7a7a7;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 1rem;
+}
+
+.song-item {
+    display: grid;
+    grid-template-columns: 16px 4fr 3fr 2fr minmax(120px, 1fr);
+    padding: 0.5rem 1rem;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.song-item:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+.song-item .song-number {
+    color: #a7a7a7;
+}
+
+.song-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.song-title {
+    color: #fff;
+    font-weight: 400;
+}
+
+.song-artist {
+    color: #a7a7a7;
+    font-size: 0.875rem;
+}
+
+.song-album {
+    color: #a7a7a7;
+}
+
+.song-duration {
+    color: #a7a7a7;
+    text-align: right;
+}
+
+.play-button {
+    opacity: 0;
+    background: none;
+    color: #fff;
+    border: none;
+    padding: 0;
+    font-size: 1rem;
+    transition: opacity 0.2s;
+}
+
+.song-item:hover .play-button {
+    opacity: 1;
+}
+
+.song-item.playing .play-button {
+    opacity: 1;
+    color: #1db954;
+}
+
+/* Buttons and common elements */
 button {
     padding: 10px 20px;
     font-size: 1em;
@@ -28,8 +581,6 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    position: relative;
-    overflow: hidden;
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
@@ -38,179 +589,38 @@ button:hover {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-    transition: left 0.5s;
-}
-
-button:hover::before {
-    left: 100%;
-}
-
-/* Message */
-#message {
-    margin-top: 20px;
-    font-size: 1.2em;
-    color: #D96482;
-    opacity: 0;
-    transform: translateY(-20px);
-    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-    display: none;
-}
-
-#message.show {
-    opacity: 1;
-    transform: translateY(0);
-    display: block;
-}
-
-/* Modal Styling */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-}
-
-.modal-content {
-    background-color: white;
-    margin: 15% auto;
-    padding: 20px;
-    border-radius: 10px;
-    width: 50%;
-    text-align: center;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
-
-.close-button {
-    float: right;
-    font-size: 24px;
-    cursor: pointer;
-}
-
-.close-button:hover {
-    color: red;
-}
-
-
-/* Photo Gallery */
-.photo-gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 15px;
-    justify-content: center;
-    padding: 20px;
-}
-
-.photo img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.photo img:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-/* Lightbox */
+/* Lightbox styles */
 .lightbox {
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    display: none;
-    align-items: center;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
     justify-content: center;
+    align-items: center;
     flex-direction: column;
 }
 
 .lightbox img {
-    max-width: 80%;
-    max-height: 80%;
-    border-radius: 10px;
-    margin-bottom: 15px; /* Space between image and button */
+    max-width: 90%;
+    max-height: 80vh;
+    border-radius: 8px;
 }
 
-.close {
+.lightbox .close {
     position: absolute;
     top: 20px;
     right: 30px;
+    color: white;
     font-size: 30px;
-    color: white;
     cursor: pointer;
 }
 
-/* Download Button */
-#download-btn {
-    padding: 10px 20px;
-    font-size: 1em;
-    background: linear-gradient(90deg, #D96482, #D98464);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.3s, box-shadow 0.3s;
-    text-decoration: none;
+
+#calendar {
+    max-width: 1100px;
+    margin: 0 auto;
 }
-
-#download-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
-
-#download-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-    transition: left 0.5s;
-}
-
-#download-btn:hover::before {
-    left: 100%;
-}
-
-
-/* Style for the iCloud invitation link */
-.icloud-invite {
-    margin-top: 20px;
-    text-align: center;
-    font-size: 1.1em;
-    color: #333;
-}
-
-.invite-link {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 10px 20px;
-    background-color: #0078D4;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-.invite-link:hover {
-    background-color: #005a8c;
-}
-
