@@ -6,30 +6,25 @@
       url("https://cdn.rawgit.com/AllThingsSmitty/fonts/25983b71/SanFrancisco/sanfranciscodisplay-regular-webfont.woff") format("woff");
   }
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f8e3e3;
-    color: #333;
+body, html {
+    height: 100%;
     margin: 0;
-    padding: 0;
-}
-body.container {
-    font-family: 'Lora', serif;
     background-color: #f8e3e3;
-    color: #333;
-    margin: 0;
-    padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    font-family: 'Lora', serif;
+}
+
+.container {
+    text-align: center;
 }
 
 .countdown-timer {
-    font-size: 3rem;
-    color: #1d3557;
-    margin-bottom: 20px;
+    font-size: 2em;
+    margin-top: 20px;
 }
+
 
 .unlock-button {
     background-color: #e63946;
