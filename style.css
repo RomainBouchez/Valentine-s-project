@@ -92,58 +92,127 @@ body.countdown-page, html.countdown-page {
 
 /* Dashboard styles */
 .apps-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+  padding: 30px;
+  perspective: 1000px;
 }
 
 .app-card {
-    background: white;
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05),
+              0 6px 6px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 1px solid rgba(217, 100, 130, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.app-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #D96482, #D98464);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
 }
 
 .app-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-8px) rotate3d(1, 1, 0, 2deg);
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1),
+              0 10px 10px rgba(0, 0, 0, 0.08);
+}
+
+.app-card:hover::before {
+  transform: scaleX(1);
 }
 
 .app-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
 
+
 .app-icon {
-    font-size: 24px;
-    margin-right: 10px;
+  font-size: 32px;
+  margin-right: 15px;
+  background: linear-gradient(135deg, #D96482, #D98464);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transform: scale(1);
+  transition: transform 0.3s ease;
+}
+
+.app-card:hover .app-icon {
+  transform: scale(1.1) rotate(5deg);
 }
 
 .app-title {
-    font-size: 1.5em;
-    margin: 0;
+  font-size: 1.5em;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+  letter-spacing: -0.5px;
 }
 
 .preview-container {
-    overflow: hidden;
-    border-radius: 8px;
+  overflow: hidden;
+  border-radius: 12px;
+  background: rgba(249, 250, 251, 0.8);
+  padding: 15px;
+  transition: transform 0.3s ease;
+}
+
+.app-card:hover .preview-container {
+  transform: scale(1.02);
 }
 
 .preview-photos {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 5px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
 }
 
 .preview-photos img {
-    width: 100%;
-    height: 80px;
-    object-fit: cover;
-    border-radius: 4px;
+  width: 100%;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.preview-photos img:hover {
+  transform: scale(1.05);
+}
+
+.preview-message, .preview-playlist {
+  padding: 15px;
+  background: white;
+  border-radius: 8px;
+  font-size: 0.95em;
+  color: #666;
+  text-align: center;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.03);
+}
+
+.preview-map {
+  text-align: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+  border-radius: 8px;
+  font-size: 1.1em;
+  color: #4b5563;
 }
 
 /* App Content styles */
@@ -155,17 +224,96 @@ body.countdown-page, html.countdown-page {
 }
 
 .back-button {
-    padding: 10px 20px;
-    margin-bottom: 20px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 1.1em;
-    color: #666;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 24px 12px 20px;
+  margin: 20px 0 30px 0;
+  background: linear-gradient(90deg, #D96482, #D98464);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 1.1em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(217, 100, 130, 0.2);
+  overflow: hidden;
 }
 
+/* Arrow icon */
+.back-button::before {
+  content: '←';
+  display: inline-block;
+  margin-right: 8px;
+  font-size: 1.2em;
+  transition: transform 0.3s ease;
+}
+
+/* Hover effects */
 .back-button:hover {
-    color: #333;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(217, 100, 130, 0.3);
+  background: linear-gradient(90deg, #D96482, #D96482);
+}
+
+.back-button:hover::before {
+  transform: translateX(-4px);
+}
+
+/* Focus state */
+.back-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(217, 100, 130, 0.3);
+}
+
+/* Active state */
+.back-button:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 10px rgba(217, 100, 130, 0.2);
+}
+
+/* Ripple effect */
+.back-button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%);
+  transform-origin: 50% 50%;
+}
+
+.back-button:focus:not(:active)::after {
+  animation: ripple 1s ease-out;
+}
+
+/* Ripple animation */
+@keyframes ripple {
+  0% {
+      transform: scale(0, 0);
+      opacity: 0.5;
+  }
+  20% {
+      transform: scale(25, 25);
+      opacity: 0.3;
+  }
+  100% {
+      opacity: 0;
+      transform: scale(40, 40);
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .back-button {
+      padding: 10px 20px 10px 16px;
+      font-size: 1em;
+      margin: 15px 0 25px 0;
+  }
 }
 
 .hidden {
@@ -428,6 +576,12 @@ body.countdown-page, html.countdown-page {
     .imessage p {
       margin: 0.5rem 0;
     }
+
+    .apps-grid {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      padding: 15px;
+      gap: 15px;
+  }
   }
 
 /* Playlist styles */
@@ -538,14 +692,36 @@ body.countdown-page, html.countdown-page {
 }
 
 .song-info {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
+.song-image-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.album-cover {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.album-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
 .song-title {
-    color: #fff;
-    font-weight: 400;
+  text-align: center;
+  font-size: 0.875rem;
+  color: #fff;
+  margin-top: 5px;
 }
 
 .song-artist {
@@ -555,6 +731,14 @@ body.countdown-page, html.countdown-page {
 
 .song-album {
     color: #a7a7a7;
+}
+
+.album-cover {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 15px;
 }
 
 .song-duration {

@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const apps = [
         {
             id: 'photos',
-            icon: '📸',
+            icon: '📷',
             title: 'Nos Photos',
             preview: `
                 <div class="preview-photos">
@@ -31,8 +31,8 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             id: 'messages',
-            icon: '💌',
-            title: 'Nos Messages',
+            icon: '💬',
+            title: 'Our Messages',
             preview: `
                 <div class="preview-message">
                     "Je pense à toi tous les jours..."
@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function() {
             title: 'Our Playlist',
             preview: `
                 <div class="preview-playlist">
-                    ♪ Notre playlist spéciale
+                    ♪ Our special playlist 
                 </div>
             `,
             content: `
@@ -141,51 +141,49 @@ document.addEventListener('DOMContentLoaded', function() {
                             <div>Album</div>
                             <div>Durée</div>
                         </div>
-                        <div class="song-item" data-duration="4:23">
-                            <div class="song-number">1</div>
-                            <div class="song-info">
-                                <div class="song-title">Perfect</div>
-                                <div class="song-artist">Ed Sheeran</div>
+                            <div class="song-item" data-duration="3:45" data-spotify-url="https://open.spotify.com/intl-fr/track/5aIVCx5tnk0ntmdiinnYvw">
+                                <div class="song-number">6</div>
+                                <div class="song-info">
+                                    <div class="song-image-info">
+                                        <div class="album-cover">
+                                            <img src="https://i.scdn.co/image/ab67616d00001e02d20231861e86a6f74ef2393e" alt="Water Album Cover">
+                                        </div>
+                                        <div class="song-title">Water</div>
+                                    </div>
+                                    <div class="song-artist">Tyla</div>
+                                    </div>
+                                    <div class="song-album">Water</div>
+                                    <div class="song-duration">3:45</div>
                             </div>
-                            <div class="song-album">÷ (Divide)</div>
-                            <div class="song-duration">4:23</div>
-                        </div>
-                        <div class="song-item" data-duration="4:29">
-                            <div class="song-number">2</div>
-                            <div class="song-info">
-                                <div class="song-title">All of Me</div>
-                                <div class="song-artist">John Legend</div>
+
+                            <div class="song-item" data-duration="4:00" data-spotify-url="https://open.spotify.com/intl-fr/track/5aIVCx5tnk0ntmdiinnYvw">
+                                <div class="song-number">7</div>
+                                <div class="song-info">
+                                    <div class="song-image-info">
+                                        <div class="album-cover">
+                                            <img src="https://i.scdn.co/image/ab67616d00001e027db0d21fc5696a3fcedfb933" alt="Greece Album Cover">
+                                        </div>
+                                        <div class="song-title">Greece</div>
+                                    </div>
+                                    <div class="song-artist">Drake</div>
+                                </div>
+                                <div class="song-album">Greece</div>
+                                <div class="song-duration">4:00</div>
                             </div>
-                            <div class="song-album">Love in the Future</div>
-                            <div class="song-duration">4:29</div>
-                        </div>
-                        <div class="song-item" data-duration="3:58">
-                            <div class="song-number">3</div>
-                            <div class="song-info">
-                                <div class="song-title">Can't Help Falling in Love</div>
-                                <div class="song-artist">Elvis Presley</div>
+
+                    <div class="song-item" data-duration="3:50">
+                        <div class="song-number">8</div>
+                        <div class="song-info">
+                            <div class="song-image-info">
+                                <div class="album-cover">
+                                    <img src="https://i.scdn.co/image/ab67616d000048511ae967e4a02c7a39eb3c189b" alt="Sundress Album Cover">
+                                </div>
+                                <div class="song-title">Sundress</div>
                             </div>
-                            <div class="song-album">Blue Hawaii</div>
-                            <div class="song-duration">3:58</div>
+                            <div class="song-artist">A$AP Rocky</div>
                         </div>
-                        <div class="song-item" data-duration="3:25">
-                            <div class="song-number">4</div>
-                            <div class="song-info">
-                                <div class="song-title">Just the Way You Are</div>
-                                <div class="song-artist">Bruno Mars</div>
-                            </div>
-                            <div class="song-album">Doo-Wops & Hooligans</div>
-                            <div class="song-duration">3:25</div>
-                        </div>
-                        <div class="song-item" data-duration="4:02">
-                            <div class="song-number">5</div>
-                            <div class="song-info">
-                                <div class="song-title">At Last</div>
-                                <div class="song-artist">Etta James</div>
-                            </div>
-                            <div class="song-album">At Last!</div>
-                            <div class="song-duration">4:02</div>
-                        </div>
+                        <div class="song-album">Sundress</div>
+                        <div class="song-duration">3:50</div>
                     </div>
                 </div>
             `
@@ -222,12 +220,14 @@ document.addEventListener('DOMContentLoaded', function() {
         const appCard = document.createElement('div');
         appCard.className = 'app-card';
         appCard.innerHTML = `
-            <div class="app-header">
-                <span class="app-icon">${app.icon}</span>
-                <h2 class="app-title">${app.title}</h2>
-            </div>
-            <div class="preview-container">
-                ${app.preview}
+            <div class="app-card-content">
+                <div class="app-header">
+                    <span class="app-icon">${app.icon}</span>
+                    <h2 class="app-title">${app.title}</h2>
+                </div>
+                <div class="preview-container">
+                    ${app.preview}
+                </div>
             </div>
         `;
         appCard.onclick = () => showAppContent(app);
@@ -294,6 +294,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
         songItems.forEach(song => {
             const playButton = song.querySelector('.play-button');
+
+            // Add click event to redirect to Spotify URL
+            song.addEventListener('click', function() {
+                const spotifyUrl = song.getAttribute('data-spotify-url');
+                if (spotifyUrl) {
+                    window.open(spotifyUrl, '_blank');
+                }
+            });
 
             playButton.addEventListener('click', function(e) {
                 e.stopPropagation();
