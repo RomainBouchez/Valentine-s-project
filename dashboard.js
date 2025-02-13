@@ -190,19 +190,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             `
         },
+        
         {
-            id: 'calendar',
-            icon: '📅',
-            title: 'Nos Dates',
+            id: 'map',
+            icon: '🗺️',
+            title: 'Nos Aventures',
             preview: `
-                <div class="preview-calendar">
-                    Prochain rendez-vous: 14 Février 2025
+                <div class="preview-map">
+                    🗺️ Notre carte des souvenirs
                 </div>
             `,
             content: `
-                <div id="calendar"></div>
+                <div class="map-container">
+                    <div id="adventure-map" style="height: 600px; width: 100%;"></div>
+                </div>
             `
-        }
+        },
     ];
 
     const appsGrid = document.getElementById('appsGrid');
@@ -212,6 +215,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     const lightboxClose = document.querySelector('.lightbox .close');
+    let map;
 
     // Create app cards
     apps.forEach(app => {
@@ -260,13 +264,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
-    function initializeAppFeatures(app) {
+    async function initializeAppFeatures(app) {
         if (app.id === 'photos') {
             initializePhotoFeatures();
         } else if (app.id === 'playlist') {
             initializePlaylistFeatures();
-        } else if (app.id === 'calendar') {
-            initializeCalendar();
+        } else if (app.id === 'map') {
+            initializeMap();
         }
     }
 
@@ -329,27 +333,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    function initializeCalendar() {
-        const calendarEl = document.getElementById('calendar');
-
-        if (calendarEl) {
-            const calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
-                headerToolbar: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
-                },
-                events: [
-                    { title: 'Premier rendez-vous', start: '2025-02-14' },
-                    { title: 'Premier dîner ensemble', start: '2024-01-15' }
-                ]
-            });
-
-            calendar.render();
-        }
-    }
-
     function downloadSelectedPhotos(selectedPhotos) {
         const zip = new JSZip();
         let count = 0;
@@ -380,4 +363,157 @@ document.addEventListener('DOMContentLoaded', function() {
             lightbox.style.display = 'none';
         }
     });
+
+
+    function initializeMap() {
+        // Check if map instance already exists and remove it
+        if (map) {
+            map.remove();
+        }
+    
+        // Adventures data
+        const adventures = [
+            {
+                id: 1,
+                name: "Premier Rendez-vous à Paris",
+                date: "11 Dec 2023",
+                lat: 48.8566,
+                lng: 2.3522,
+                description: "Notre première rencontre magique",
+                image: "/api/placeholder/300/200" // Using placeholder for testing
+            },
+            {
+                id: 2,
+                name: "Weekend à Lyon",
+                date: "15 Jan 2024",
+                lat: 45.7578,
+                lng: 4.8320,
+                description: "Un weekend inoubliable ensemble",
+                image: "/api/placeholder/300/200" // Using placeholder for testing
+            },
+            {
+                id: 3,
+                name: "Vacances à Nice",
+                date: "10 Feb 2024",
+                lat: 43.7102,
+                lng: 7.2620,
+                description: "Des moments parfaits au bord de la mer",
+                image: "/api/placeholder/300/200" // Using placeholder for testing
+            }
+        ];
+    
+        // Initialize map
+        map = L.map('adventure-map').setView([47.5260, 20.2551], 4);
+        
+        // Add tile layer with fewer roads
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+            subdomains: 'abcd',
+            maxZoom: 19
+        }).addTo(map);
+    
+        // Custom marker icon
+        const customIcon = L.divIcon({
+            html: `
+                <div style="
+                    width: 32px;
+                    height: 32px;
+                    background-color:rgba(239, 68, 68, 0);
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: white;
+                    transform-origin: bottom;
+                    transition: transform 0.3s ease;
+                ">
+                    <img src="Heart.svg" alt="Heart" style="width: 32px; height: 32px;">
+                </div>
+            `,
+            className: 'custom-marker',
+            iconSize: [32, 32],
+            iconAnchor: [16, 32]
+        });
+    
+        // Add markers
+        adventures.forEach(adventure => {
+            const marker = L.marker([adventure.lat, adventure.lng], { icon: customIcon })
+                .addTo(map);
+    
+            const popupContent = document.createElement('div');
+            popupContent.className = 'adventure-popup';
+            popupContent.innerHTML = `
+                <div style="
+                    padding: 1rem;
+                    min-width: 200px;
+                    max-width: 300px;
+                ">
+                    <h3 style="
+                        font-size: 1.125rem;
+                        font-weight: 600;
+                        margin-bottom: 0.5rem;
+                    ">${adventure.name}</h3>
+                    <p style="
+                        font-size: 0.875rem;
+                        color: #666;
+                        margin-bottom: 0.5rem;
+                    ">${adventure.date}</p>
+                    <img src="${adventure.image}" 
+                        alt="${adventure.name}" 
+                        style="
+                            width: 100%;
+                            height: 150px;
+                            object-fit: cover;
+                            border-radius: 0.375rem;
+                            margin-bottom: 0.5rem;
+                            transition: transform 0.3s ease;
+                        "
+                    />
+                    <p style="
+                        font-size: 0.875rem;
+                        color: #333;
+                    ">${adventure.description}</p>
+                </div>
+            `;
+    
+            marker.bindPopup(popupContent, {
+                maxWidth: 300,
+                className: 'adventure-popup'
+            });
+    
+            // Add hover effects
+            marker.on('mouseover', function() {
+                this.getElement().querySelector('div').style.transform = 'scale(1.1)';
+            });
+            marker.on('mouseout', function() {
+                this.getElement().querySelector('div').style.transform = 'scale(1)';
+            });
+        });
+    
+        // Add CSS
+        if (!document.querySelector('#map-styles')) {
+            const style = document.createElement('style');
+            style.id = 'map-styles';
+            style.textContent = `
+                .adventure-popup .leaflet-popup-content-wrapper {
+                    border-radius: 0.5rem;
+                    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+                }
+                .adventure-popup .leaflet-popup-content {
+                    margin: 0;
+                }
+                .custom-marker {
+                    background: none;
+                    border: none;
+                }
+                
+            `;
+            document.head.appendChild(style);
+        }
+    
+        // Force a resize event to ensure the map renders correctly
+        setTimeout(() => {
+            map.invalidateSize();
+        }, 100);
+    }
 });
