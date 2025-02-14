@@ -813,16 +813,96 @@ button:hover {
 }
 
 
-#calendar {
-    max-width: 1100px;
-    margin: 0 auto;
+/* Download button styles */
+.download-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 28px;
+  margin: 20px 0;  /* Added vertical margin */
+  background: linear-gradient(90deg, #D96482, #D98464);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 1.1em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 4px 15px rgba(217, 100, 130, 0.2);
+  overflow: hidden;
+  text-decoration: none;
 }
 
-#calendar-root {
-  width: 100%;
-  min-height: 600px;
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+/* Space between button and image when they're siblings */
+img + .download-btn,
+.download-btn + img {
+  margin-top: 20px;
+}
+
+/* Download icon */
+.download-btn::before {
+  content: '↓';
+  display: inline-block;
+  margin-right: 10px;
+  font-size: 1.2em;
+  transition: transform 0.3s ease;
+}
+
+/* Hover effects */
+.download-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(217, 100, 130, 0.3);
+  background: linear-gradient(90deg, #D96482, #D96482);
+}
+
+.download-btn:hover::before {
+  transform: translateY(4px);
+}
+
+/* Focus state */
+.download-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(217, 100, 130, 0.3);
+}
+
+/* Active state */
+.download-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 10px rgba(217, 100, 130, 0.2);
+}
+
+/* Disabled state */
+.download-btn:disabled {
+  background: #aaa;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Ripple effect */
+.download-btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%);
+  transform-origin: 50% 50%;
+}
+
+.download-btn:focus:not(:active)::after {
+  animation: ripple 1s ease-out;
+}
+
+/* Mobile responsiveness */
+@media screen and (max-width: 640px) {
+  .download-btn {
+    padding: 10px 24px;
+    font-size: 1em;
+  }
 }

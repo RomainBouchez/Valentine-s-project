@@ -15,47 +15,47 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="photo-gallery">
                     <div class="photo">
                         <input type="checkbox" class="select-photo">
-                        <img src="img/photo1.JPG" alt="Photo 1" onclick="openLightbox('photo1.jpg')">
+                        <img src="img/photo1.JPG" alt="Photo 1" onclick="openLightbox('img/photo1.jpg')">
                     </div>
                     <div class="photo">
                         <input type="checkbox" class="select-photo">
-                        <img src="img/photo2.JPG" alt="Photo 2" onclick="openLightbox('photo2.jpg')">
+                        <img src="img/photo2.JPG" alt="Photo 2" onclick="openLightbox('img/photo2.jpg')">
                     </div>
                     <div class="photo">
                         <input type="checkbox" class="select-photo">
-                        <img src="img/photo3.JPG" alt="Photo 3" onclick="openLightbox('photo3.jpg')">
+                        <img src="img/photo3.JPG" alt="Photo 3" onclick="openLightbox('img/photo3.jpg')">
                     </div>
                     <div class="photo">
                         <input type="checkbox" class="select-photo">
-                        <img src="img/photo4.JPG" alt="Photo 4" onclick="openLightbox('photo4.jpg')">
+                        <img src="img/photo4.JPG" alt="Photo 4" onclick="openLightbox('img/photo4.jpg')">
                     </div>
                     <div class="photo">
                         <input type="checkbox" class="select-photo">
-                        <img src="img/photo5.JPG" alt="Photo 5" onclick="openLightbox('photo5.jpg')">
+                        <img src="img/photo5.JPG" alt="Photo 5" onclick="openLightbox('img/photo5.jpg')">
                     </div>
                     <div class="photo">
                         <input type="checkbox" class="select-photo">
-                        <img src="img/photo6.JPG" alt="Photo 6" onclick="openLightbox('photo6.jpg')">
+                        <img src="img/photo6.JPG" alt="Photo 6" onclick="openLightbox('img/photo6.jpg')">
                     </div>
                     <div class="photo">
                         <input type="checkbox" class="select-photo">
-                        <img src="img/photo7.JPG" alt="Photo 7" onclick="openLightbox('photo7.jpg')">
+                        <img src="img/photo7.JPG" alt="Photo 7" onclick="openLightbox('img/photo7.jpg')">
                     </div>
                     <div class="photo">
                         <input type="checkbox" class="select-photo">
-                        <img src="img/photo8.JPG" alt="Photo 8" onclick="openLightbox('photo8.jpg')">
+                        <img src="img/photo8.JPG" alt="Photo 8" onclick="openLightbox('img/photo8.jpg')">
                     </div>
                     <div class="photo">
                         <input type="checkbox" class="select-photo">
-                        <img src="img/photo9.JPG" alt="Photo 9" onclick="openLightbox('photo9.jpg')">
+                        <img src="img/photo9.JPG" alt="Photo 9" onclick="openLightbox('img/photo9.jpg')">
                     </div>
                     <div class="photo">
                         <input type="checkbox" class="select-photo">
-                        <img src="img/photo10.JPG" alt="Photo 10" onclick="openLightbox('photo10.jpg')">
+                        <img src="img/photo10.JPG" alt="Photo 10" onclick="openLightbox('img/photo10.jpg')">
                     </div>
                     <div class="photo">
                         <input type="checkbox" class="select-photo">
-                        <img src="img/photo11.JPG" alt="Photo 11" onclick="openLightbox('photo11.jpg')">
+                        <img src="img/photo11.JPG" alt="Photo 11" onclick="openLightbox('img/photo11.jpg')">
                     </div>                    
                 </div>
                 <button id="download-selected" class="download-btn">Télécharger la sélection</button>
