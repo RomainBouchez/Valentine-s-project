@@ -7,24 +7,56 @@ document.addEventListener('DOMContentLoaded', function() {
             preview: `
                 <div class="preview-photos">
                     <img src="photo1.jpg" alt="Preview 1">
-                    <img src="photo2.jpg" alt="Preview 2">
-                    <img src="photo3.jpg" alt="Preview 3">
+                    <img src="img/photo11.jpg" alt="Preview 2">
+                    <img src="img/photo7.jpg" alt="Preview 3">
                 </div>
             `,
             content: `
                 <div class="photo-gallery">
                     <div class="photo">
                         <input type="checkbox" class="select-photo">
-                        <img src="photo1.jpg" alt="Photo 1" onclick="openLightbox('photo1.jpg')">
+                        <img src="img/photo1.JPG" alt="Photo 1" onclick="openLightbox('photo1.jpg')">
                     </div>
                     <div class="photo">
                         <input type="checkbox" class="select-photo">
-                        <img src="photo2.jpg" alt="Photo 2" onclick="openLightbox('photo2.jpg')">
+                        <img src="img/photo2.JPG" alt="Photo 2" onclick="openLightbox('photo2.jpg')">
                     </div>
                     <div class="photo">
                         <input type="checkbox" class="select-photo">
-                        <img src="photo3.jpg" alt="Photo 3" onclick="openLightbox('photo3.jpg')">
+                        <img src="img/photo3.JPG" alt="Photo 3" onclick="openLightbox('photo3.jpg')">
                     </div>
+                    <div class="photo">
+                        <input type="checkbox" class="select-photo">
+                        <img src="img/photo4.JPG" alt="Photo 4" onclick="openLightbox('photo4.jpg')">
+                    </div>
+                    <div class="photo">
+                        <input type="checkbox" class="select-photo">
+                        <img src="img/photo5.JPG" alt="Photo 5" onclick="openLightbox('photo5.jpg')">
+                    </div>
+                    <div class="photo">
+                        <input type="checkbox" class="select-photo">
+                        <img src="img/photo6.JPG" alt="Photo 6" onclick="openLightbox('photo6.jpg')">
+                    </div>
+                    <div class="photo">
+                        <input type="checkbox" class="select-photo">
+                        <img src="img/photo7.JPG" alt="Photo 7" onclick="openLightbox('photo7.jpg')">
+                    </div>
+                    <div class="photo">
+                        <input type="checkbox" class="select-photo">
+                        <img src="img/photo8.JPG" alt="Photo 8" onclick="openLightbox('photo8.jpg')">
+                    </div>
+                    <div class="photo">
+                        <input type="checkbox" class="select-photo">
+                        <img src="img/photo9.JPG" alt="Photo 9" onclick="openLightbox('photo9.jpg')">
+                    </div>
+                    <div class="photo">
+                        <input type="checkbox" class="select-photo">
+                        <img src="img/photo10.JPG" alt="Photo 10" onclick="openLightbox('photo10.jpg')">
+                    </div>
+                    <div class="photo">
+                        <input type="checkbox" class="select-photo">
+                        <img src="img/photo11.JPG" alt="Photo 11" onclick="openLightbox('photo11.jpg')">
+                    </div>                    
                 </div>
                 <button id="download-selected" class="download-btn">Télécharger la sélection</button>
             `
@@ -383,31 +415,39 @@ document.addEventListener('DOMContentLoaded', function() {
         const adventures = [
             {
                 id: 1,
-                name: "Premier Rendez-vous à Paris",
-                date: "11 Dec 2023",
-                lat: 48.8566,
-                lng: 2.3522,
-                description: "Notre première rencontre magique",
-                image: "/api/placeholder/300/200" // Using placeholder for testing
+                name: "Amsterdam loving encounter",
+                date: "20 Mar 2024",
+                lat: 52.3676,
+                lng: 4.9041,
+                description: "First time seeing each other",
+                image: "img/photo1.JPG" // Using placeholder for testing
             },
             {
                 id: 2,
-                name: "Weekend à Lyon",
-                date: "15 Jan 2024",
-                lat: 45.7578,
-                lng: 4.8320,
-                description: "Un weekend inoubliable ensemble",
-                image: "/api/placeholder/300/200" // Using placeholder for testing
+                name: "Trip to Athens",
+                date: "15 Apr 2024",
+                lat: 37.9838,
+                lng: 23.7275,
+                description: "",
+                image: "img/photoathen.JPG" // Using placeholder for testing
             },
             {
                 id: 3,
-                name: "Vacances à Nice",
-                date: "10 Feb 2024",
-                lat: 43.7102,
-                lng: 7.2620,
-                description: "Des moments parfaits au bord de la mer",
-                image: "/api/placeholder/300/200" // Using placeholder for testing
-            }
+                name: "First time seeing my family",
+                date: "10 May 2024",
+                lat: 47.2184,
+                lng: -1.5536,
+                description: "",
+                image: "img/photofamille.JPG" // Using placeholder for testing
+            },
+            {
+                id: 4,
+                name: "Erasmus at Le Mans",
+                date: "25 Jun 2024",
+                lat: 48.0061,
+                lng: 0.1996,
+                
+            },
         ];
     
         // Initialize map
